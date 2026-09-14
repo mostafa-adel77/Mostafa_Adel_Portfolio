@@ -45,16 +45,16 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-50 w-full border-b border-gray-800 bg-black/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <nav className="fixed left-0 top-0 z-50 w-full border-b border-gray-800 bg-black/90 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <a
           href="#home"
           onClick={() => handleLinkClick("home")}
           className="group flex items-center"
         >
-          <div className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-blue-500/30 bg-gray-900 shadow-lg shadow-blue-500/10 transition duration-300 group-hover:border-blue-500 group-hover:shadow-blue-500/20">
-            <span className="text-2xl font-black italic tracking-tight text-white transition duration-300 group-hover:text-blue-500">
+          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-blue-500/30 bg-gray-900 shadow-lg shadow-blue-500/10 transition duration-300 group-hover:border-blue-500 group-hover:shadow-blue-500/20 sm:h-11 sm:w-11">
+            <span className="text-xl font-black italic tracking-tight text-white transition duration-300 group-hover:text-blue-500 sm:text-2xl">
               M
             </span>
 
@@ -63,7 +63,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-5 md:flex lg:gap-6">
           {navLinks.map((link) => {
             const linkId = link.href.replace("#", "");
 
@@ -72,7 +72,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => handleLinkClick(linkId)}
-                className={`text-lg font-bold transition ${
+                className={`text-base font-bold transition lg:text-lg ${
                   activeLink === linkId
                     ? "text-blue-500"
                     : "text-gray-300 hover:text-blue-500"
@@ -88,17 +88,22 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="rounded-lg border cursor-pointer border-gray-800 bg-gray-900 p-2 text-2xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500 md:hidden"
+          className="flex cursor-pointer items-center justify-center rounded-lg border border-gray-800 bg-gray-900 p-2 text-2xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500 md:hidden"
           aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <HiX /> : <HiMenu />}
         </button>
       </div>
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="border-t border-gray-800 bg-black/95 px-6 py-5 md:hidden">
-          <div className="flex flex-col gap-2">
+      <div
+        className={`overflow-hidden border-t border-gray-800 bg-black/95 transition-all duration-300 md:hidden ${
+          isMenuOpen ? "max-h-125 opacity-100" : "max-h-0 border-t-0 opacity-0"
+        }`}
+      >
+        <div className="px-4 py-4 sm:px-6">
+          <div className="flex flex-col gap-1">
             {navLinks.map((link) => {
               const linkId = link.href.replace("#", "");
 
@@ -119,7 +124,7 @@ export default function Navbar() {
             })}
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
