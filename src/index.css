@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@import "tailwindcss";
+
+@plugin "daisyui";
+
+@theme {
+  --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  background: #050b18;
+  color: #f8fafc;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(99, 102, 241, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 70%,
+      rgba(139, 92, 246, 0.06),
+      transparent 30%
+    ),
+    #050505;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.45);
+  color: white;
+}
+
+/* Custom Components */
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-[92%] max-w-6xl;
+  }
+
+  .section {
+    @apply border-t border-white/5 py-20 md:py-24;
+  }
+
+  .eyebrow {
+    @apply mb-2 text-3xl font-semibold uppercase tracking-widest text-blue-500;
+  }
+
+  .title {
+    @apply text-3xl font-extrabold tracking-tight md:text-4xl;
+  }
+}
+
+/* Reveal Animation */
+
+.reveal {
+  animation: reveal 0.7s ease both;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Grid */
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.045) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+/* Project Image */
+
+.project-image {
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.035);
+}
