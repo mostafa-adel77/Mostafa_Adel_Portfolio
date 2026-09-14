@@ -34,7 +34,7 @@ export const projects: Project[] = [
       "A modern portfolio website built with React.js, TypeScript, Vercel and Tailwind CSS.",
     image: "profile.png",
     technologies: ["React.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    liveUrl: "https://my-portfolio-black-delta-33.vercel.app/",
-    githubUrl: "#",
+    liveUrl: "https://mostafa-adel-portfolio.vercel.app/",
+    githubUrl: "https://github.com/mostafa-adel77/Mostafa_Adel_Portfolio",
   },
 ];
