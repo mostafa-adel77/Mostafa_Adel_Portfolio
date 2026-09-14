@@ -11,7 +11,7 @@ import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen w-full overflow-x-hidden bg-black text-white">
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
 
