@@ -119,7 +119,12 @@ export default function Contact() {
               </a>
 
               {/* Location */}
-              <div className="flex items-center gap-4 rounded-2xl border border-white/5 bg-white/3 p-4">
+              <a
+                href="https://maps.app.goo.gl/FMmmgdYrvKUpcbg99"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 rounded-2xl border border-white/5 bg-white/3 p-4 transition duration-300 hover:border-indigo-500/40 hover:bg-white/5"
+              >
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10 text-xl text-indigo-400">
                   <CiLocationOn />
                 </span>
@@ -131,7 +136,7 @@ export default function Contact() {
 
                   <p className="mt-1 text-sm text-gray-300">Egypt</p>
                 </div>
-              </div>
+              </a>
 
               {/* Social Links */}
               <div className="grid grid-cols-2 gap-4 pt-2">
