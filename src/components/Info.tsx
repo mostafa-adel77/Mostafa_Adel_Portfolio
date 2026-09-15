@@ -1,7 +1,21 @@
 import { motion } from "framer-motion";
 import { infoItems } from "../data/info";
+import { translations } from "../languages/translations";
 
-export default function Info() {
+type InfoProps = {
+  language: "en" | "ar";
+};
+
+export default function Info({ language }: InfoProps) {
+  const t = translations[language];
+
+  const infoTitles: Record<string, string> = {
+    "Real Projects": t.info.realProjects,
+    Technologies: t.info.technologies,
+    "Passion for Coding": t.info.passion,
+    "Learning & Improving": t.info.learning,
+  };
+
   return (
     <section className="border-y border-gray-800 py-12">
       <div className="mx-auto grid max-w-6xl gap-5 px-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -20,7 +34,9 @@ export default function Info() {
           >
             <h3 className="text-3xl font-bold text-blue-500">{item.value}</h3>
 
-            <p className="mt-2 text-sm text-gray-400">{item.title}</p>
+            <p className="mt-2 text-sm text-gray-400">
+              {infoTitles[item.title]}
+            </p>
           </motion.div>
         ))}
       </div>

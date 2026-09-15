@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
 import { skills } from "../data/skills";
+import { translations } from "../languages/translations";
 
-export default function Skills() {
+type SkillsProps = {
+  language: "en" | "ar";
+};
+
+export default function Skills({ language }: SkillsProps) {
+  const t = translations[language];
+
   return (
     <section id="skills" className="section">
       <div className="container-x">
@@ -13,13 +20,12 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <p className="eyebrow">My Skills</p>
+          <p className="eyebrow">{t.skills.title}</p>
 
-          <h2 className="title">Technologies I Work With</h2>
+          <h2 className="title">{t.skills.heading}</h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-gray-400">
-            Technologies and tools I use to build modern and responsive web
-            applications.
+            {t.skills.description}
           </p>
         </motion.div>
 

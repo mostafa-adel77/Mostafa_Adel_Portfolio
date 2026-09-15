@@ -1,12 +1,19 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { translations } from "../languages/translations";
 
-export default function Footer() {
+type FooterProps = {
+  language: "en" | "ar";
+};
+
+export default function Footer({ language }: FooterProps) {
+  const t = translations[language];
+
   return (
     <footer className="border-t border-gray-800 py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
         {/* Copyright */}
         <p className="text-sm text-gray-500">
-          © 2026 Mostafa Adel. All rights reserved.
+          © 2026 Mostafa Adel. {t.footer.rights}
         </p>
 
         {/* Social Links */}

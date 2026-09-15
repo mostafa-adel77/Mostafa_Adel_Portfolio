@@ -1,17 +1,41 @@
 import { useEffect, useState } from "react";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX, HiGlobeAlt } from "react-icons/hi";
 
-export default function Navbar() {
+type NavbarProps = {
+  language: "en" | "ar";
+  setLanguage: React.Dispatch<React.SetStateAction<"en" | "ar">>;
+};
+
+export default function Navbar({ language, setLanguage }: NavbarProps) {
   const [activeLink, setActiveLink] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Journey", href: "#journey" },
-    { name: "Contact", href: "#contact" },
+    {
+      name: language === "en" ? "Home" : "الرئيسية",
+      href: "#home",
+    },
+    {
+      name: language === "en" ? "About" : "عني",
+      href: "#about",
+    },
+    {
+      name: language === "en" ? "Skills" : "المهارات",
+      href: "#skills",
+    },
+    {
+      name: language === "en" ? "Projects" : "المشاريع",
+      href: "#projects",
+    },
+    {
+      name: language === "en" ? "Journey" : "رحلتي",
+      href: "#journey",
+    },
+    {
+      name: language === "en" ? "Contact" : "تواصل معي",
+      href: "#contact",
+    },
   ];
 
   useEffect(() => {
@@ -44,8 +68,13 @@ export default function Navbar() {
     setIsMenuOpen(false);
   };
 
+  const handleLanguageChange = (lang: "en" | "ar") => {
+    setLanguage(lang);
+    setIsLanguageOpen(false);
+  };
+
   return (
-    <nav className="fixed left-0 top-0 z-50 w-full max-w-[100vw] overflow-x-hidden border-b border-gray-800 bg-black/90 backdrop-blur-md">
+    <nav className="fixed left-0 top-0 z-50 w-full max-w-[100vw] border-b border-gray-800 bg-black/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full min-w-0 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <a
@@ -69,7 +98,7 @@ export default function Navbar() {
 
             return (
               <a
-                key={link.name}
+                key={link.href}
                 href={link.href}
                 onClick={() => handleLinkClick(linkId)}
                 className={`whitespace-nowrap text-base font-bold transition lg:text-lg ${
@@ -82,18 +111,103 @@ export default function Navbar() {
               </a>
             );
           })}
+
+          {/* Language */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+              className="flex items-center cursor-pointer justify-center rounded-lg border border-gray-700 p-2 text-xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500"
+              aria-label="Change language"
+              aria-expanded={isLanguageOpen}
+            >
+              <HiGlobeAlt />
+            </button>
+
+            {isLanguageOpen && (
+              <div className="absolute right-0 top-12 z-9999 w-36 overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-xl">
+                <button
+                  type="button"
+                  onClick={() => handleLanguageChange("en")}
+                  className={`w-full px-4 py-3 text-left text-sm font-semibold transition ${
+                    language === "en"
+                      ? "bg-blue-500/10 text-blue-500"
+                      : "text-gray-300 hover:bg-gray-800 hover:text-blue-500"
+                  }`}
+                >
+                  English
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleLanguageChange("ar")}
+                  className={`w-full px-4 py-3 text-left text-sm font-semibold transition ${
+                    language === "ar"
+                      ? "bg-blue-500/10 text-blue-500"
+                      : "text-gray-300 hover:bg-gray-800 hover:text-blue-500"
+                  }`}
+                >
+                  العربية
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          type="button"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="flex shrink-0 cursor-pointer items-center justify-center rounded-lg border border-gray-800 bg-gray-900 p-2 text-2xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500 md:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? <HiX /> : <HiMenu />}
-        </button>
+        {/* Mobile Controls */}
+        <div className="flex items-center gap-2 md:hidden">
+          {/* Language */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+              className="flex items-center cursor-pointer justify-center rounded-lg border border-gray-700 p-2 text-xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500"
+              aria-label="Change language"
+              aria-expanded={isLanguageOpen}
+            >
+              <HiGlobeAlt />
+            </button>
+
+            {isLanguageOpen && (
+              <div className="absolute right-0 top-12 z-9999 w-36 overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-xl">
+                <button
+                  type="button"
+                  onClick={() => handleLanguageChange("en")}
+                  className={`w-full px-4 py-3 text-left text-sm font-semibold transition ${
+                    language === "en"
+                      ? "bg-blue-500/10 text-blue-500"
+                      : "text-gray-300 hover:bg-gray-800 hover:text-blue-500"
+                  }`}
+                >
+                  English
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleLanguageChange("ar")}
+                  className={`w-full px-4 py-3 text-left text-sm font-semibold transition ${
+                    language === "ar"
+                      ? "bg-blue-500/10 text-blue-500"
+                      : "text-gray-300 hover:bg-gray-800 hover:text-blue-500"
+                  }`}
+                >
+                  العربية
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu */}
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="flex shrink-0 cursor-pointer items-center justify-center rounded-lg border border-gray-800 bg-gray-900 p-2 text-2xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500"
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <HiX /> : <HiMenu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
@@ -109,7 +223,7 @@ export default function Navbar() {
 
               return (
                 <a
-                  key={link.name}
+                  key={link.href}
                   href={link.href}
                   onClick={() => handleLinkClick(linkId)}
                   className={`w-full rounded-lg px-4 py-3 text-base font-semibold transition ${

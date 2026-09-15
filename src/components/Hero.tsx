@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
+import { translations } from "../languages/translations";
 
-export default function Hero() {
+type HeroProps = {
+  language: "en" | "ar";
+};
+
+export default function Hero({ language }: HeroProps) {
+  const t = translations[language];
+
   return (
     <section
       id="home"
@@ -15,7 +22,8 @@ export default function Hero() {
             transition={{ duration: 0.7 }}
             className="text-4xl font-bold leading-tight text-white md:text-6xl"
           >
-            Hi, I&apos;m <span className="text-blue-500">Mostafa Adel</span>
+            {t.hero.greeting}{" "}
+            <span className="text-blue-500">{t.hero.name}</span>
           </motion.h1>
 
           <motion.p
@@ -24,7 +32,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="eyebrow text-xl text-white"
           >
-            Front-End Developer
+            {t.hero.role}
           </motion.p>
 
           <motion.p
@@ -33,9 +41,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="mt-6 max-w-xl text-lg leading-8 text-gray-400"
           >
-            I build modern, responsive, and user-friendly web applications using
-            React.js, JavaScript, TypeScript, Strapi, and modern front-end
-            technologies.
+            {t.hero.description}
           </motion.p>
 
           {/* Buttons */}
@@ -50,9 +56,9 @@ export default function Hero() {
               download="MOSTAFA ADEL CV.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="rounded-lg btn btn-primary p-6 font-semibold transition hover:bg-blue-700"
+              className="btn btn-primary rounded-lg p-6 font-semibold transition hover:bg-blue-700"
             >
-              Download CV 📂
+              {t.hero.downloadCV} 📂
             </motion.a>
 
             <motion.a
@@ -61,7 +67,7 @@ export default function Hero() {
               whileTap={{ scale: 0.97 }}
               className="rounded-lg border border-gray-700 px-6 py-3 font-semibold text-gray-300 transition hover:border-blue-500 hover:text-blue-400"
             >
-              Contact Me
+              {t.hero.contactMe}
             </motion.a>
           </motion.div>
         </div>

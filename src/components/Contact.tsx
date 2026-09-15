@@ -5,8 +5,15 @@ import toast from "react-hot-toast";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaGithub, FaLinkedin, FaPhoneAlt } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
+import { translations } from "../languages/translations";
 
-export default function Contact() {
+type ContactProps = {
+  language: "en" | "ar";
+};
+
+export default function Contact({ language }: ContactProps) {
+  const t = translations[language];
+
   const form = useRef<HTMLFormElement>(null);
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,11 +29,11 @@ export default function Contact() {
         "2IBQ8JMkkei_P5_c1",
       )
       .then(() => {
-        toast.success("Message sent successfully!");
+        toast.success(t.contact.successMessage);
         form.current?.reset();
       })
       .catch(() => {
-        toast.error("Something went wrong. Please try again.");
+        toast.error(t.contact.errorMessage);
       });
   };
 
@@ -42,13 +49,12 @@ export default function Contact() {
       <div className="container-x">
         {/* Section Header */}
         <div className="mb-14 text-center">
-          <p className="eyebrow">My Contact</p>
+          <p className="eyebrow">{t.contact.title}</p>
 
-          <h2 className="title">Let&apos;s Work Together</h2>
+          <h2 className="title">{t.contact.heading}</h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-gray-400">
-            Have a project or opportunity in mind? Feel free to get in touch
-            with me.
+            {t.contact.description}
           </p>
         </div>
 
@@ -64,16 +70,15 @@ export default function Contact() {
           >
             <div className="mb-8">
               <p className="mb-2 text-sm font-medium uppercase tracking-wider text-indigo-400">
-                Get in touch
+                {t.contact.getInTouch}
               </p>
 
               <h3 className="text-2xl font-bold text-white md:text-3xl">
-                Let&apos;s talk about your project.
+                {t.contact.talkAboutProject}
               </h3>
 
               <p className="mt-4 leading-7 text-gray-400">
-                I&apos;m always open to discussing new projects, creative ideas,
-                or opportunities to be part of your team.
+                {t.contact.contactDescription}
               </p>
             </div>
 
@@ -89,7 +94,7 @@ export default function Contact() {
 
                 <div>
                   <p className="text-xs uppercase tracking-wider text-gray-500">
-                    Email
+                    {t.contact.email}
                   </p>
 
                   <p className="mt-1 text-sm text-gray-300 transition group-hover:text-indigo-400">
@@ -109,7 +114,7 @@ export default function Contact() {
 
                 <div>
                   <p className="text-xs uppercase tracking-wider text-gray-500">
-                    Phone
+                    {t.contact.phone}
                   </p>
 
                   <p className="mt-1 text-sm text-gray-300 transition group-hover:text-indigo-400">
@@ -131,7 +136,7 @@ export default function Contact() {
 
                 <div>
                   <p className="text-xs uppercase tracking-wider text-gray-500">
-                    Location
+                    {t.contact.location}
                   </p>
 
                   <p className="mt-1 text-sm text-gray-300">Egypt</p>
@@ -181,11 +186,11 @@ export default function Contact() {
           >
             <div className="mb-8">
               <p className="mb-2 text-sm font-medium uppercase tracking-wider text-indigo-400">
-                Send a message
+                {t.contact.sendMessage}
               </p>
 
               <h3 className="text-2xl font-bold text-white md:text-3xl">
-                Contact Me
+                {t.contact.contactMe}
               </h3>
             </div>
 
@@ -195,14 +200,14 @@ export default function Contact() {
                 htmlFor="name"
                 className="mb-2 block text-sm font-medium text-gray-300"
               >
-                Name
+                {t.contact.name}
               </label>
 
               <input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Your Name"
+                placeholder={t.contact.yourName}
                 required
                 className="w-full rounded-xl border border-white/10 bg-white/4 px-4 py-3.5 text-white placeholder:text-gray-600 outline-none transition duration-300 focus:border-indigo-500 focus:bg-white/6 focus:ring-2 focus:ring-indigo-500/10"
               />
@@ -214,14 +219,14 @@ export default function Contact() {
                 htmlFor="email"
                 className="mb-2 block text-sm font-medium text-gray-300"
               >
-                Email
+                {t.contact.emailAddress}
               </label>
 
               <input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="Your Email"
+                placeholder={t.contact.yourEmail}
                 required
                 className="w-full rounded-xl border border-white/10 bg-white/4 px-4 py-3.5 text-white placeholder:text-gray-600 outline-none transition duration-300 focus:border-indigo-500 focus:bg-white/6 focus:ring-2 focus:ring-indigo-500/10"
               />
@@ -233,14 +238,14 @@ export default function Contact() {
                 htmlFor="message"
                 className="mb-2 block text-sm font-medium text-gray-300"
               >
-                Message
+                {t.contact.message}
               </label>
 
               <textarea
                 id="message"
                 name="message"
                 rows={6}
-                placeholder="Write your message..."
+                placeholder={t.contact.writeMessage}
                 required
                 className="w-full resize-none rounded-xl border border-white/10 bg-white/4 px-4 py-3.5 text-white placeholder:text-gray-600 outline-none transition duration-300 focus:border-indigo-500 focus:bg-white/6 focus:ring-2 focus:ring-indigo-500/10"
               />
@@ -251,7 +256,7 @@ export default function Contact() {
               type="submit"
               className="w-full cursor-pointer rounded-xl bg-linear-to-r from-indigo-500 to-violet-500 px-6 py-3.5 font-semibold text-white shadow-lg shadow-indigo-500/20 transition duration-300 hover:-translate-y-0.5 hover:from-indigo-400 hover:to-violet-400 hover:shadow-indigo-500/30 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Send Message
+              {t.contact.send}
             </button>
           </motion.form>
         </div>
