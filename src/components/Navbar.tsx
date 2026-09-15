@@ -66,6 +66,7 @@ export default function Navbar({ language, setLanguage }: NavbarProps) {
   const handleLinkClick = (id: string) => {
     setActiveLink(id);
     setIsMenuOpen(false);
+    setIsLanguageOpen(false);
   };
 
   const handleLanguageChange = (lang: "en" | "ar") => {
@@ -112,12 +113,12 @@ export default function Navbar({ language, setLanguage }: NavbarProps) {
             );
           })}
 
-          {/* Language */}
-          <div className="relative">
+          {/* Desktop Language */}
+          <div className="relative shrink-0 ">
             <button
               type="button"
               onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-              className="flex items-center cursor-pointer justify-center rounded-lg border border-gray-700 p-2 text-xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500"
+              className="flex cursor-pointer items-center justify-center rounded-lg border border-gray-700 p-2 text-xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500"
               aria-label="Change language"
               aria-expanded={isLanguageOpen}
             >
@@ -125,7 +126,9 @@ export default function Navbar({ language, setLanguage }: NavbarProps) {
             </button>
 
             {isLanguageOpen && (
-              <div className="absolute right-0 top-12 z-9999 w-36 overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-xl">
+              <div
+                className={`absolute ${language === "en" ? "right-0" : "left-0"} mt-2 w-40 overflow-hidden rounded-lg border border-gray-800 bg-gray-900`}
+              >
                 <button
                   type="button"
                   onClick={() => handleLanguageChange("en")}
@@ -154,53 +157,14 @@ export default function Navbar({ language, setLanguage }: NavbarProps) {
           </div>
         </div>
 
-        {/* Mobile Controls */}
-        <div className="flex items-center gap-2 md:hidden">
-          {/* Language */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-              className="flex items-center cursor-pointer justify-center rounded-lg border border-gray-700 p-2 text-xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500"
-              aria-label="Change language"
-              aria-expanded={isLanguageOpen}
-            >
-              <HiGlobeAlt />
-            </button>
-
-            {isLanguageOpen && (
-              <div className="absolute right-0 top-12 z-9999 w-36 overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-xl">
-                <button
-                  type="button"
-                  onClick={() => handleLanguageChange("en")}
-                  className={`w-full px-4 py-3 text-left text-sm font-semibold transition ${
-                    language === "en"
-                      ? "bg-blue-500/10 text-blue-500"
-                      : "text-gray-300 hover:bg-gray-800 hover:text-blue-500"
-                  }`}
-                >
-                  English
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleLanguageChange("ar")}
-                  className={`w-full px-4 py-3 text-left text-sm font-semibold transition ${
-                    language === "ar"
-                      ? "bg-blue-500/10 text-blue-500"
-                      : "text-gray-300 hover:bg-gray-800 hover:text-blue-500"
-                  }`}
-                >
-                  العربية
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Mobile Menu */}
+        {/* Mobile Menu Button */}
+        <div className="relative shrink-0 md:hidden">
           <button
             type="button"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+              setIsLanguageOpen(false);
+            }}
             className="flex shrink-0 cursor-pointer items-center justify-center rounded-lg border border-gray-800 bg-gray-900 p-2 text-2xl text-gray-300 transition hover:border-blue-500 hover:text-blue-500"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
@@ -236,6 +200,60 @@ export default function Navbar({ language, setLanguage }: NavbarProps) {
                 </a>
               );
             })}
+          </div>
+
+          {/* Mobile Language */}
+          <div className="mt-3 border-t border-gray-800 pt-3">
+            <button
+              type="button"
+              onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+              className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-semibold text-gray-300 transition hover:bg-gray-900 hover:text-blue-500"
+              aria-expanded={isLanguageOpen}
+            >
+              <span className="flex items-center gap-3">
+                <HiGlobeAlt className="text-xl" />
+
+                {language === "en" ? "Language" : "اللغة"}
+              </span>
+
+              <span className="text-sm">
+                {language === "en" ? "English" : "العربية"}
+              </span>
+            </button>
+
+            {isLanguageOpen && (
+              <div className="mt-2 overflow-hidden rounded-lg border border-gray-800 bg-gray-900">
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleLanguageChange("en");
+                    setIsMenuOpen(false);
+                  }}
+                  className={`w-full px-4 py-3 text-left text-sm font-semibold transition ${
+                    language === "en"
+                      ? "bg-blue-500/10 text-blue-500"
+                      : "text-gray-300 hover:bg-gray-800 hover:text-blue-500"
+                  }`}
+                >
+                  English
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleLanguageChange("ar");
+                    setIsMenuOpen(false);
+                  }}
+                  className={`w-full px-4 py-3 text-left text-sm font-semibold transition ${
+                    language === "ar"
+                      ? "bg-blue-500/10 text-blue-500"
+                      : "text-gray-300 hover:bg-gray-800 hover:text-blue-500"
+                  }`}
+                >
+                  العربية
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
