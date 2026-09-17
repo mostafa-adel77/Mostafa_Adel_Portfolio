@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import BackToTop from "./components/BackToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
 export default function App() {
   const [language, setLanguage] = useState<"en" | "ar">("en");
 
@@ -37,6 +38,7 @@ export default function App() {
 
       <Footer language={language} />
       <BackToTop />
+      <WhatsAppButton />
     </div>
   );
 }
